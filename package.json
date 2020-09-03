@@ -1,5 +1,5 @@
 {
-  "name": "bergeymanual-frontend",
+  "name": "bergeys-manual",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -9,7 +9,8 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@nuxtjs/axios": "^5.12.0",
+    "@nuxtjs/auth": "^4.9.1",
+    "@nuxtjs/axios": "^5.12.2",
     "@nuxtjs/pwa": "^3.0.0-beta.20",
     "bootstrap": "^4.5.0",
     "bootstrap-vue": "^2.16.0",
@@ -19,5 +20,17 @@
   },
   "devDependencies": {
     "@mdi/font": "^5.5.55"
-  }
+  },
+  "description": "## Build Setup",
+  "main": "nuxt.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toluwase1/bergeys-frontend.git"
+  },
+  "author": "symbiotech",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/toluwase1/bergeys-frontend/issues"
+  },
+  "homepage": "https://github.com/toluwase1/bergeys-frontend#readme"
 }
