@@ -1,5 +1,7 @@
 <template>
+<v-app class="green">
     <h1 class="title">Bergey Manual</h1>
+</v-app>
 </template>
 
 <script>

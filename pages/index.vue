@@ -1,15 +1,15 @@
 <template>
-  <v-app>
+  <v-app class="green">
     <v-card width="400px" class="mx-auto mt-5">
 
-      <Notification :message="error" v-if="error"/>
+      <!-- <Notification :message="error" v-if="error"/> -->
 
       <v-card-title>
       <h1> Bergey's Login </h1>
       </v-card-title>
       <v-card-text>
         <v-form>
-          <v-text-field label = "email" 
+          <v-text-field label="Email" filled rounded required
             v-model="email"
             name="email"
             prepend-icon="mdi-mail"
@@ -18,7 +18,7 @@
             :type ="showPassword ? 'text' : 'password'"
             v-model="password"
             name="password"
-            label ="Password"
+            label ="Password" filled rounded required
             prepend-icon="mdi-lock"
             :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
            @click:append= "showPassword = !showPassword"
@@ -27,7 +27,7 @@
           
           <v-card-actions>
 
-            <v-btn color="success" @click="login">
+            <v-btn color="success" rounded @click="register">
               Login
             </v-btn>
             <v-spacer></v-spacer>
@@ -40,14 +40,14 @@
         <!-- <v-btn color="success">Register </v-btn> -->
         
         <nuxt-link to="/register">
-          <v-btn color="success">
+          <v-btn color="success" rounded>
             Register
           </v-btn>
         </nuxt-link>
         
         <v-spacer> </v-spacer>
         <nuxt-link to="/">
-          <v-btn color="info">
+          <v-btn color="info" rounded>
             Login
           </v-btn>
         </nuxt-link>
@@ -63,9 +63,9 @@ import Notification from '~/components/Notification'
 
 export default {
   middleware: 'guest',
-  components: {
-    Notification,
-  },
+  // components: {
+  //   Notification,
+  // },
 
   data() {
     return {

@@ -35,7 +35,8 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    '@plugins/vuetify'
+    '@plugins/vuetify',
+    '@plugins/vue-notification'
   ],
   /*
   ** Auto import components

@@ -37,8 +37,7 @@
         </nuxt-link>
         </v-btn>
 
-      </v-toolbar-items>
-
+<v-btn flat>
       <div class="navbar-menu">
         <div class="navbar-end">
           <div class="navbar-item has-dropdown is-hoverable" v-if="isAuthenticated">
@@ -48,12 +47,16 @@
             <nuxt-link class="navbar-item" to="/profile">{{ loggedInUser.username }}</nuxt-link>
             <a class="navbar-item" @click="logout">Logout</a>
           </div>
+
+
           <template v-else>
             <nuxt-link class="navbar-item" to="/register">Register</nuxt-link>
             <nuxt-link class="navbar-item" to="/">Log In</nuxt-link>
           </template>
         </div>
       </div>
+</v-btn>
+      </v-toolbar-items>
 
       
 
