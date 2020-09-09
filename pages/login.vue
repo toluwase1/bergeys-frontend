@@ -28,7 +28,7 @@
           <v-card-actions>
 
             <v-btn color="success" @click="login">
-              Login
+                Login
             </v-btn>
             <v-spacer></v-spacer>
           </v-card-actions>
@@ -47,9 +47,9 @@
         
         <v-spacer> </v-spacer>
         <nuxt-link to="/">
-          <v-btn color="info">
+         <v-btn color="info">
             Login
-          </v-btn>
+         </v-btn>
         </nuxt-link>
       </v-card-actions>
     </v-card>

@@ -1,6 +1,9 @@
 <template>
   <v-app>
     <v-card width="400px" class="mx-auto mt-5">
+
+      <Notification :message="error" v-if="error"/>
+
       <v-card-title>
         <h1> Register </h1>
       </v-card-title>
@@ -8,6 +11,7 @@
         <v-form>
           <v-text-field
             v-model="email"
+            name="email"
             :error-messages="emailErrors"
             label="Email"
             required
@@ -17,41 +21,31 @@
           />
 
           <v-text-field label="Username"
-                        prepend-icon="mdi-account-circle"
+            v-model="username"
+            name="username"
+            prepend-icon="mdi-account-circle"
           />
-          <v-text-field
-            :type="showPassword ? 'text' : 'password'"
-            label="Password"
-            prepend-icon="mdi-lock"
-            :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-            @click:append="showPassword = !showPassword"
-          />
-
           <v-text-field
             v-model="password"
+            name="password"
             :type="showPassword ? 'text' : 'password'"
-            :error-messages="passwordErrors"
             label="Password"
-            required
-            @input="$v.password.$touch()"
-            @blur="$v.password.$touch()"
             prepend-icon="mdi-lock"
             :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
             @click:append="showPassword = !showPassword"
           />
+          <v-divider></v-divider>
 
+          <v-card-actions>
+
+            <v-btn color="success" @click="register">
+              Register
+            </v-btn>
+            <v-spacer></v-spacer>
+          </v-card-actions>
 
         </v-form>
       </v-card-text>
-      <v-divider></v-divider>
-      <v-card-actions>
-
-
-        <v-spacer></v-spacer>
-        <v-btn color="success" @click.stop.prevent="register">
-          Submit
-        </v-btn>
-      </v-card-actions>
     </v-card>
     <v-card-actions>
       <nuxt-link to="/register">
@@ -71,10 +65,15 @@
 </template>
 
 <script>
+  import Notification from '~/components/Notification'
   import {validationMixin} from "vuelidate";
   import {required, minLength, email, sameAs} from "vuelidate/lib/validators";
 
   export default {
+    middleware: 'guest',
+    components: {
+      Notification,
+    },
     mixins: [validationMixin],
     validations: {
       name: {required, minLength: minLength(4)},
@@ -84,34 +83,35 @@
     },
     data() {
       return {
-        name: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-        status: null,
-        showPassword: false
+        username: '',
+        email: '',
+        password: '',
+        error: null
       }
     },
+
     methods: {
-      register() {
-        //this is a sample. you can write your code as you see fit
-        alert("This will use axios to connect with the api. You should remove this alert afterwards")
-        this.$axios.$post('/register', {
-          email: this.email,
-          name: this.name,
-          password: this.password,
-          //this will post the email, name and password to the api server
-        })
-          .then(response => {
-            //do something when the response is a success
+      async register() {
+        try {
+          await this.$axios.post('register', {
+            username: this.username,
+            email: this.email,
+            password: this.password
           })
-          .catch(error => {
+
+          await this.$auth.loginWith('local', {
+            data: {
+              email: this.email,
+              password: this.password
+            },
           })
-//do something when there is a failure
+
+          this.$router.push('/home')
+        } catch (e) {
+          this.error = e.response.data.message
+        }
       }
     }
-
-
   };
 
 

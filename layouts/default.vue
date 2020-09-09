@@ -39,21 +39,54 @@
 
       </v-toolbar-items>
 
+      <div class="navbar-menu">
+        <div class="navbar-end">
+          <div class="navbar-item has-dropdown is-hoverable" v-if="isAuthenticated">
+            <!--a class="navbar-link">
+              {{ loggedInUser.username }}
+            </a-->
+            <nuxt-link class="navbar-item" to="/profile">{{ loggedInUser.username }}</nuxt-link>
+            <a class="navbar-item" @click="logout">Logout</a>
+          </div>
+          <template v-else>
+            <nuxt-link class="navbar-item" to="/register">Register</nuxt-link>
+            <nuxt-link class="navbar-item" to="/">Log In</nuxt-link>
+          </template>
+        </div>
+      </div>
+
       
 
-      <!-- <v-btn icon>
+      <!--v-btn icon>
         <v-icon>mdi-heart</v-icon>
       </v-btn>
 
       <v-btn icon>
         <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn> -->
+      </v-btn-->
     </v-toolbar>
   <nuxt/>
   </v-card>
 
   </v-app>
 </template>
+
+<script>
+import { mapGetters } from 'vuex'
+
+export default {
+  
+  methods: {
+    async logout() {
+      await this.$auth.logout();
+    },
+  },
+
+  computed: {
+    ...mapGetters(['isAuthenticated', 'loggedInUser'])
+  }
+}
+</script>
 
 <style>
 html {
